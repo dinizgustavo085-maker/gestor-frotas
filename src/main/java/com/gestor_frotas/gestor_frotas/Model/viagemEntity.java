@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class viagemEntity {
@@ -14,12 +15,12 @@ public class viagemEntity {
     // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd  HH:mm"))
     @Column(name = "data_saida")
-    private LocalDate data_saida;
+    private LocalDateTime data_saida;
 
     // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd  HH:mm"))
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd H H:mm"))
     @Column(name = "data_estimada")
-    private LocalDate data_entrada;
+    private LocalDateTime data_entrada;
 
     private String origem;
     private String destino;
@@ -42,8 +43,12 @@ public class viagemEntity {
 //        if (data_entrada == null && data_saida == null ){
 //            return "A data entrada e data saida não podem ser a anterior";
 //        }
-//        return
+//        Duration duracao = Duration.between(data_saida, data_entrada);
 //
+//         long horas = duracao.toHours();
+//         long minutos = duracao.toMinutesPart();
+//
+//         return horas + "h " + minutos + "min";
 //    }
 
     public String getOrigem() {
@@ -95,21 +100,6 @@ public class viagemEntity {
         this.id = id;
     }
 
-    public LocalDate getData_saida() {
-        return data_saida;
-    }
-
-    public void setData_saida(LocalDate data_saida) {
-        this.data_saida = data_saida;
-    }
-
-    public LocalDate getData_entrada() {
-        return data_entrada;
-    }
-
-    public void setData_entrada(LocalDate data_entrada) {
-        this.data_entrada = data_entrada;
-    }
 
     public LocalDate getTempo_estimado() {
         return tempo_estimado;
@@ -117,5 +107,21 @@ public class viagemEntity {
 
     public void setTempo_estimado(LocalDate tempo_estimado) {
         this.tempo_estimado = tempo_estimado;
+    }
+
+    public LocalDateTime getData_saida() {
+        return data_saida;
+    }
+
+    public void setData_saida(LocalDateTime data_saida) {
+        this.data_saida = data_saida;
+    }
+
+    public LocalDateTime getData_entrada() {
+        return data_entrada;
+    }
+
+    public void setData_entrada(LocalDateTime data_entrada) {
+        this.data_entrada = data_entrada;
     }
 }
