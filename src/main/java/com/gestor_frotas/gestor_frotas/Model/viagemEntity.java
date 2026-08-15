@@ -1,9 +1,9 @@
 package com.gestor_frotas.gestor_frotas.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 public class viagemEntity {
@@ -11,31 +11,40 @@ public class viagemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer data_saida;
-    private Integer data_entrada;
+    // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd  HH:mm"))
+    @Column(name = "data_saida")
+    private LocalDate data_saida;
+
+    // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd  HH:mm"))
+    @Column(name = "data_estimada")
+    private LocalDate data_entrada;
+
     private String origem;
     private String destino;
     private String status;
     private String distancia;
-    private String tempo_estimado;
+
+    // varivel para calcular o tempo estimado
+    @Column(name = "tempo_estimado")
+    private LocalDate tempo_estimado;
+
+
+
     private String observacao;
 
-
-    public Integer getData_saida() {
-        return data_saida;
+    public viagemEntity() {
     }
 
-    public void setData_saida(Integer data_saida) {
-        this.data_saida = data_saida;
-    }
-
-    public Integer getData_entrada() {
-        return data_entrada;
-    }
-
-    public void setData_entrada(Integer data_entrada) {
-        this.data_entrada = data_entrada;
-    }
+    // para o calculo o tempo estimado com data e hora para o futuro
+//    public String calcularTempoEstimado(){
+//        if (data_entrada == null && data_saida == null ){
+//            return "A data entrada e data saida não podem ser a anterior";
+//        }
+//        return
+//
+//    }
 
     public String getOrigem() {
         return origem;
@@ -69,13 +78,6 @@ public class viagemEntity {
         this.distancia = distancia;
     }
 
-    public String getTempo_estimado() {
-        return tempo_estimado;
-    }
-
-    public void setTempo_estimado(String tempo_estimado) {
-        this.tempo_estimado = tempo_estimado;
-    }
 
     public String getObservacao() {
         return observacao;
@@ -91,5 +93,29 @@ public class viagemEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public LocalDate getData_saida() {
+        return data_saida;
+    }
+
+    public void setData_saida(LocalDate data_saida) {
+        this.data_saida = data_saida;
+    }
+
+    public LocalDate getData_entrada() {
+        return data_entrada;
+    }
+
+    public void setData_entrada(LocalDate data_entrada) {
+        this.data_entrada = data_entrada;
+    }
+
+    public LocalDate getTempo_estimado() {
+        return tempo_estimado;
+    }
+
+    public void setTempo_estimado(LocalDate tempo_estimado) {
+        this.tempo_estimado = tempo_estimado;
     }
 }

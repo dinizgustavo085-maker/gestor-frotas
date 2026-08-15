@@ -1,29 +1,35 @@
 package com.gestor_frotas.gestor_frotas.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
+import org.hibernate.validator.constraints.br.CPF;
+
+import java.time.LocalDate;
 
 @Entity
 public class motoristaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer cpf;
+
+    // faz a validação do cpf para seja igual a 14 caracteres digitados
+    @CPF(message = "CPF inválido")
+    @Column(length = 14, unique = true)
+    private String cpf;
+
     private String nome;
     private String categoria_cnh;
     private String validade_cnh;
-    private Integer data_nascimento;
+
+    // transforma em json com isso tenho um formato de atributo pré-defido
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd"))
+    @Column(name = "data_nascimento")
+    private LocalDate data_nascimento;
+
     private Integer telefone;
     private String email;
 
-    public Integer getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(Integer cpf) {
-        this.cpf = cpf;
+    public motoristaEntity(){
     }
 
     public String getNome() {
@@ -50,14 +56,6 @@ public class motoristaEntity {
         this.validade_cnh = validade_cnh;
     }
 
-    public Integer getData_nascimento() {
-        return data_nascimento;
-    }
-
-    public void setData_nascimento(Integer data_nascimento) {
-        this.data_nascimento = data_nascimento;
-    }
-
     public Integer getTelefone() {
         return telefone;
     }
@@ -80,5 +78,21 @@ public class motoristaEntity {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public LocalDate getData_nascimento() {
+        return data_nascimento;
+    }
+
+    public void setData_nascimento(LocalDate data_nascimento) {
+        this.data_nascimento = data_nascimento;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 }
