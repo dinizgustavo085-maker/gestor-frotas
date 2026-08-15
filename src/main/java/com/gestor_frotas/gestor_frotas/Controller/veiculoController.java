@@ -1,6 +1,5 @@
 package com.gestor_frotas.gestor_frotas.Controller;
 
-import com.gestor_frotas.gestor_frotas.Model.motoristaEntity;
 import com.gestor_frotas.gestor_frotas.Model.veiculoEntity;
 import com.gestor_frotas.gestor_frotas.Repository.veiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +37,10 @@ public class veiculoController {
         veiculoAtual.setTipo(dadosAtualizadosVeiculos.getTipo());
         veiculoAtual.setQuilometragem(dadosAtualizadosVeiculos.getQuilometragem());
         veiculoAtual.setStatus(dadosAtualizadosVeiculos.getStatus());
+        veiculoAtual.setTipo_caminhao(dadosAtualizadosVeiculos.getTipo_caminhao());
+        veiculoAtual.setCapacidade_carga_kg(dadosAtualizadosVeiculos.getCapacidade_carga_kg());
+        veiculoAtual.setQuantidade_eixos(dadosAtualizadosVeiculos.getQuantidade_eixos());
+        veiculoAtual.setTipo_carroceria(dadosAtualizadosVeiculos.getTipo_carroceria());
 
         return comandos.save(veiculoAtual);
     }
