@@ -20,6 +20,10 @@ public class veiculoEntity {
     private Integer quilometragem;
     private String combustivel;
     private String status;
+    private String tipo_caminhao;
+    private Integer capacidade_carga_kg;
+    private Integer quantidade_eixos;
+    private String tipo_carroceria;
 
 
     public String getPlaca() {
@@ -92,6 +96,38 @@ public class veiculoEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTipo_caminhao() {
+        return tipo_caminhao;
+    }
+
+    public void setTipo_caminhao(String tipo_caminhao) {
+        this.tipo_caminhao = tipo_caminhao;
+    }
+
+    public Integer getCapacidade_carga_kg() {
+        return capacidade_carga_kg;
+    }
+
+    public void setCapacidade_carga_kg(Integer capacidade_carga_kg) {
+        this.capacidade_carga_kg = capacidade_carga_kg;
+    }
+
+    public Integer getQuantidade_eixos() {
+        return quantidade_eixos;
+    }
+
+    public void setQuantidade_eixos(Integer quantidade_eixos) {
+        this.quantidade_eixos = quantidade_eixos;
+    }
+
+    public String getTipo_carroceria() {
+        return tipo_carroceria;
+    }
+
+    public void setTipo_carroceria(String tipo_carroceria) {
+        this.tipo_carroceria = tipo_carroceria;
     }
 
     public Integer getId() {
