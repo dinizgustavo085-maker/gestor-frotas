@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class motoristaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer motorista_id;
 
     // faz a validação do cpf para seja igual a 14 caracteres digitados
     @CPF(message = "CPF inválido")
@@ -72,13 +72,6 @@ public class motoristaEntity {
         this.email = email;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public LocalDate getData_nascimento() {
         return data_nascimento;
@@ -94,5 +87,13 @@ public class motoristaEntity {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public Integer getMotorista_id() {
+        return motorista_id;
+    }
+
+    public void setMotorista_id(Integer motorista_id) {
+        this.motorista_id = motorista_id;
     }
 }
