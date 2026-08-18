@@ -2,6 +2,7 @@ package com.gestor_frotas.gestor_frotas.Controller;
 
 import com.gestor_frotas.gestor_frotas.Model.motoristaEntity;
 import com.gestor_frotas.gestor_frotas.Repository.motoristaRepository;
+import com.gestor_frotas.gestor_frotas.Service.MotoristaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,9 +16,15 @@ public class motoristaController {
     @Autowired
     private motoristaRepository comandos;
 
+    private final MotoristaService motoristaService;
+
+    public motoristaController(MotoristaService motoristaService) {
+        this.motoristaService = motoristaService;
+    }
+
     @PostMapping
-    public motoristaEntity salvarMotorista(@RequestBody motoristaEntity motorista){
-        return comandos.save(motorista);
+    public motoristaEntity salvarMotorista(@RequestBody motoristaEntity motorista) {
+        return motoristaService.salvarMotorista(motorista);
     }
 
     // requisição para mostrar a minha lista de dados do motorista

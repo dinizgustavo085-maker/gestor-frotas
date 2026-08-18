@@ -1,9 +1,8 @@
 package com.gestor_frotas.gestor_frotas.Controller;
 
-import com.gestor_frotas.gestor_frotas.Model.veiculoEntity;
 import com.gestor_frotas.gestor_frotas.Model.viagemEntity;
 import com.gestor_frotas.gestor_frotas.Repository.viagemRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import com.gestor_frotas.gestor_frotas.Service.ViagemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +16,13 @@ public class viagemController {
     @Autowired
     public viagemRepository comandos;
 
+    @Autowired
+    private ViagemService viagemService;
+
     // Requição de salvar os dados da viagem
     @PostMapping
     public viagemEntity salvarViagem(@RequestBody viagemEntity viagem){
-        return comandos.save(viagem);
+        return viagemService.salvarViagemCompleta(viagem);
     }
 
     // Requição de andar pela a lista de dados da viagem
