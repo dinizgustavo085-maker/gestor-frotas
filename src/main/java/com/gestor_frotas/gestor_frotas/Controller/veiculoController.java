@@ -2,6 +2,7 @@ package com.gestor_frotas.gestor_frotas.Controller;
 
 import com.gestor_frotas.gestor_frotas.Model.veiculoEntity;
 import com.gestor_frotas.gestor_frotas.Repository.veiculoRepository;
+import com.gestor_frotas.gestor_frotas.Service.VeiculoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,15 @@ public class veiculoController {
     @Autowired
     private veiculoRepository comandos;
 
+    private final VeiculoService veiculoService;
+
+    public veiculoController(VeiculoService veiculoService) {
+        this.veiculoService = veiculoService;
+    }
+
     @PostMapping
     public veiculoEntity salvarVeiculo(@RequestBody veiculoEntity veiculo){
-        return comandos.save(veiculo);
+        return veiculoService.salvarVeiculo(veiculo);
     }
 
     @GetMapping
