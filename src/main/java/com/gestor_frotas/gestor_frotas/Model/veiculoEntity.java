@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 public class veiculoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer veiculo_id;
 
     private String placa;
     private String marca;
@@ -130,11 +130,11 @@ public class veiculoEntity {
         this.tipo_carroceria = tipo_carroceria;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getVeiculo_id() {
+        return veiculo_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setVeiculo_id(Integer veiculo_id) {
+        this.veiculo_id = veiculo_id;
     }
 }

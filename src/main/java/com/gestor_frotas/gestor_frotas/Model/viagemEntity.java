@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class viagemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer viagem_id;
 
     // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd  HH:mm"))
@@ -92,15 +92,6 @@ public class viagemEntity {
         this.observacao = observacao;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-
     public LocalDate getTempo_estimado() {
         return tempo_estimado;
     }
@@ -123,5 +114,13 @@ public class viagemEntity {
 
     public void setData_entrada(LocalDateTime data_entrada) {
         this.data_entrada = data_entrada;
+    }
+
+    public Integer getViagem_id() {
+        return viagem_id;
+    }
+
+    public void setViagem_id(Integer viagem_id) {
+        this.viagem_id = viagem_id;
     }
 }
