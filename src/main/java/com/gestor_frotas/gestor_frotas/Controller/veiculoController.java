@@ -40,6 +40,7 @@ public class veiculoController {
         veiculoAtual.setCombustivel(dadosAtualizadosVeiculos.getCombustivel());
         veiculoAtual.setModelo(dadosAtualizadosVeiculos.getModelo());
         veiculoAtual.setMarca(dadosAtualizadosVeiculos.getMarca());
+        veiculoAtual.setVeiculo_id(dadosAtualizadosVeiculos.getVeiculo_id());
         veiculoAtual.setPlaca(dadosAtualizadosVeiculos.getPlaca());
         veiculoAtual.setTipo(dadosAtualizadosVeiculos.getTipo());
         veiculoAtual.setQuilometragem(dadosAtualizadosVeiculos.getQuilometragem());

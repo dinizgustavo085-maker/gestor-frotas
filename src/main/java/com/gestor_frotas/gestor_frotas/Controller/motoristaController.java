@@ -42,7 +42,7 @@ public class motoristaController {
         motoristaAtual.setCategoria_cnh(dadosAtualizadosMotorista.getCategoria_cnh());
         motoristaAtual.setEmail(dadosAtualizadosMotorista.getEmail());
         motoristaAtual.setNome(dadosAtualizadosMotorista.getNome());
-        motoristaAtual.setId(dadosAtualizadosMotorista.getId());
+        motoristaAtual.setMotorista_id(dadosAtualizadosMotorista.getMotorista_id());
         motoristaAtual.setData_nascimento(dadosAtualizadosMotorista.getData_nascimento());
         motoristaAtual.setTelefone(dadosAtualizadosMotorista.getTelefone());
         motoristaAtual.setValidade_cnh(dadosAtualizadosMotorista.getValidade_cnh());

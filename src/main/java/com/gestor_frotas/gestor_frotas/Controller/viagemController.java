@@ -40,7 +40,7 @@ public class viagemController {
         viagemAtual.setDestino(dadosAtualizadosViagem.getDestino());
         viagemAtual.setDistancia(dadosAtualizadosViagem.getDistancia());
         viagemAtual.setOrigem(dadosAtualizadosViagem.getOrigem());
-        viagemAtual.setId(dadosAtualizadosViagem.getId());
+        viagemAtual.setViagem_id(dadosAtualizadosViagem.getViagem_id());
         viagemAtual.setStatus(dadosAtualizadosViagem.getStatus());
         viagemAtual.setTempo_estimado(dadosAtualizadosViagem.getTempo_estimado());
         viagemAtual.setObservacao(dadosAtualizadosViagem.getObservacao());
