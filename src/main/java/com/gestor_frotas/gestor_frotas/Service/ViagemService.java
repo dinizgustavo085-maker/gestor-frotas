@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ViagemService {
 
-    private final viagemRepository viagemRepository;
+    private viagemRepository viagemRepository;
+    private TomTomService tomTomService;
 
     // puxando o repository
-    public ViagemService(viagemRepository viagemRepository) {
+    public ViagemService(viagemRepository viagemRepository, TomTomService tomTomService ) {
         this.viagemRepository = viagemRepository;
+        this.tomTomService = tomTomService;
     }
+
 
     // salva as valicações
     @Transactional
@@ -21,6 +24,7 @@ public class ViagemService {
         validarDatas(viagemValidacao);
         validarStatus(viagemValidacao);
         validarRota(viagemValidacao);
+        preenchendoCoordenada(viagemValidacao);
 
         return viagemRepository.save(viagemValidacao);
     }
@@ -53,4 +57,20 @@ public class ViagemService {
             viagemStatus.setStatus("AGENDADA");
         }
     }
+
+    public void preenchendoCoordenada(viagemEntity viagem){
+
+        // requisições do TomTomService das classes Coordenada e geodificar
+        TomTomService.Coordenada origem = tomTomService.geocodificar(viagem.getOrigem());
+        TomTomService.Coordenada destino = tomTomService.geocodificar(viagem.getDestino());
+
+        // pega a latitude e longitude da api e transforma para o meu código com set
+        viagem.setLatitude_origem(origem.getLatitude());
+        viagem.setLongitude_origem(origem.getLongitude());
+
+        viagem.setLatitude_destino(destino.getLatitude());
+        viagem.setLongitude_destino(destino.getLongitude());
+
+    }
+
 }
