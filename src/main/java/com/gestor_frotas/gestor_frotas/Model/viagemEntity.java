@@ -13,12 +13,12 @@ public class viagemEntity {
     private Integer viagem_id;
 
     // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd  HH:mm"))
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd HH:mm"))
     @Column(name = "data_saida")
     private LocalDateTime data_saida;
 
     // transforma em json e faz a pré-defido o valor que devo colocar de data/hora
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd H H:mm"))
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = ("yyyy/MM/dd HH:mm"))
     @Column(name = "data_estimada")
     private LocalDateTime data_entrada;
 
@@ -26,6 +26,11 @@ public class viagemEntity {
     private String destino;
     private String status;
     private String distancia;
+
+    private Double latitude_origem;
+    private Double longitude_origem;
+    private Double latitude_destino;
+    private Double longitude_destino;
 
     // varivel para calcular o tempo estimado
     @Column(name = "tempo_estimado")
@@ -85,7 +90,7 @@ public class viagemEntity {
 
 
     public String getObservacao() {
-        return observacao;
+        return null;
     }
 
     public void setObservacao(String observacao) {
@@ -117,10 +122,45 @@ public class viagemEntity {
     }
 
     public Integer getViagem_id() {
-        return viagem_id;
+        return null;
     }
 
     public void setViagem_id(Integer viagem_id) {
         this.viagem_id = viagem_id;
+    }
+
+    public void setLatitde(Double latitude) {
+    }
+
+    public Double getLatitude_origem() {
+        return latitude_origem;
+    }
+
+    public void setLatitude_origem(Double latitude_origem) {
+        this.latitude_origem = latitude_origem;
+    }
+
+    public Double getLongitude_origem() {
+        return longitude_origem;
+    }
+
+    public void setLongitude_origem(Double longitude_origem) {
+        this.longitude_origem = longitude_origem;
+    }
+
+    public Double getLatitude_destino() {
+        return latitude_destino;
+    }
+
+    public void setLatitude_destino(Double latitude_destino) {
+        this.latitude_destino = latitude_destino;
+    }
+
+    public Double getLongitude_destino() {
+        return longitude_destino;
+    }
+
+    public void setLongitude_destino(Double longitude_destino) {
+        this.longitude_destino = longitude_destino;
     }
 }
