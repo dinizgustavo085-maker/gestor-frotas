@@ -22,6 +22,10 @@ public class viagemEntity {
     @Column(name = "data_estimada")
     private LocalDateTime data_entrada;
 
+    private Long distancia_metros;
+    private Long duracao_segundos;
+    private LocalDateTime data_chegada;
+
     private String origem;
     private String destino;
     private String status;
@@ -35,7 +39,6 @@ public class viagemEntity {
     // varivel para calcular o tempo estimado
     @Column(name = "tempo_estimado")
     private LocalDate tempo_estimado;
-
 
 
     private String observacao;
@@ -162,5 +165,29 @@ public class viagemEntity {
 
     public void setLongitude_destino(Double longitude_destino) {
         this.longitude_destino = longitude_destino;
+    }
+
+    public Long getDistancia_metros() {
+        return distancia_metros;
+    }
+
+    public void setDistancia_metros(Long distancia_metros) {
+        this.distancia_metros = distancia_metros;
+    }
+
+    public Long getDuracao_segundos() {
+        return duracao_segundos;
+    }
+
+    public void setDuracao_segundos(Long duracao_segundos) {
+        this.duracao_segundos = duracao_segundos;
+    }
+
+    public LocalDateTime getData_chegada() {
+        return data_chegada;
+    }
+
+    public void setData_chegada(LocalDateTime data_chegada) {
+        this.data_chegada = data_chegada;
     }
 }

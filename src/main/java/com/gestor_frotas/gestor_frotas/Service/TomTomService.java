@@ -50,6 +50,9 @@ public class TomTomService {
                     .encode() // Codifica a URL (ex: "São Paulo" vira "S%C3%A3o%20Paulo")
                     .toUri(); // Converte para o objeto URI do Java
 
+                    //exemplo de código com nome pesquisado
+                    //https://api.tomtom.com/search/2/geocode/Sobral%2C%20CE.json?key=Apikey=1&countrySet=BR&language=pt-BR
+
             HttpClient client = HttpClient.newBuilder() // configura cliente antes de criá-lo
                     .connectTimeout(Duration.ofSeconds(timeout))// tempo definido para conectar ao servidor
                     .build(); // finaliza o retorno
@@ -81,6 +84,7 @@ public class TomTomService {
             Double latitude = position.get("lat").asDouble();
             Double longitude = position.get("lon").asDouble();
 
+
             // retorno de sucesso
             return new Coordenada(latitude, longitude);
 
@@ -89,6 +93,57 @@ public class TomTomService {
             throw new RuntimeException("Erro ao buscar coordenadas na TomTom", e);
         }
     }
+
+
+
+
+    public RotaCalculo calculateRoute(String latitude_origem, String longitude_destino,String latitude_destino, String longitude_origem){
+         String pontos = latitude_origem + "," + longitude_origem + ":" + latitude_destino + "," + longitude_destino;
+        try {
+               URI uri = UriComponentsBuilder
+                    .fromUriString(baseUrl)
+                    .pathSegment("routing", "1", "calculateRoute", pontos, "json")
+                    .queryParam("key", apiKey)
+                    .queryParam("traffic", true)
+                    .queryParam("travelMode", "car")
+                    .queryParam("routeType", "fastest")
+                    .build()
+                       .encode()
+                       .toUri();
+               // exemplo da URL de pesquisa
+            // https://api.tomtom.com/routing/1/calculateRoute/-3.7319,-38.5267:-3.6861,-40.3497/json?key=Apikey&traffic=true&travelMode=car&routeType=fastest
+
+               HttpClient client = HttpClient.newBuilder()
+                       .connectTimeout(Duration.ofSeconds(timeout))
+                       .build();
+
+               HttpRequest request = HttpRequest.newBuilder()
+                       .uri(uri)
+                       .timeout(Duration.ofSeconds(timeout))
+                       .GET()
+                       .build();
+
+                HttpResponse<String> response = client.send(
+                        request,
+                        HttpResponse.BodyHandlers.ofString()
+                );
+
+
+                JsonNode json = objectMapper.readTree(response.body());
+
+                JsonNode summary = json.get("routes").get(0).get("summary");
+
+                Long distanciaMetros = summary.get("lengthInMeters").asLong();
+                Long duracaoSegundos = summary.get("travelTimeInSeconds").asLong();
+
+                return new RotaCalculo(distanciaMetros, duracaoSegundos);
+
+        }catch (Exception e){
+            throw new RuntimeException("Erro ao calcular rota na TomTom", e);
+        }
+
+    }
+
 
     public static class Coordenada {
         private Double latitude;
@@ -105,6 +160,25 @@ public class TomTomService {
 
         public Double getLongitude() {
             return longitude;
+        }
+    }
+
+    public static class RotaCalculo{
+        private Long distanciaMetros;
+        private Long duracaoSegundos;
+
+
+        public RotaCalculo(Long distanciaMetros, Long duracaoSegundos) {
+            this.distanciaMetros = distanciaMetros;
+            this.duracaoSegundos = duracaoSegundos;
+        }
+
+        public Long getDistanciaMetros() {
+            return distanciaMetros;
+        }
+
+        public Long getDuracaoSegundos() {
+            return duracaoSegundos;
         }
     }
 }
