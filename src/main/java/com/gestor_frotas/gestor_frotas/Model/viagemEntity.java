@@ -40,24 +40,19 @@ public class viagemEntity {
     @Column(name = "tempo_estimado")
     private LocalDate tempo_estimado;
 
+    @ManyToOne
+    @JoinColumn(name = "motorista_id")
+    private motoristaEntity motorista;
+
+    @ManyToOne
+    @JoinColumn(name = "veiculo_id")
+    private veiculoEntity veiculo;
 
     private String observacao;
 
     public viagemEntity() {
     }
 
-    // para o calculo o tempo estimado com data e hora para o futuro
-//    public String calcularTempoEstimado(){
-//        if (data_entrada == null && data_saida == null ){
-//            return "A data entrada e data saida não podem ser a anterior";
-//        }
-//        Duration duracao = Duration.between(data_saida, data_entrada);
-//
-//         long horas = duracao.toHours();
-//         long minutos = duracao.toMinutesPart();
-//
-//         return horas + "h " + minutos + "min";
-//    }
 
     public String getOrigem() {
         return origem;
@@ -93,7 +88,7 @@ public class viagemEntity {
 
 
     public String getObservacao() {
-        return null;
+        return observacao;
     }
 
     public void setObservacao(String observacao) {
@@ -125,7 +120,7 @@ public class viagemEntity {
     }
 
     public Integer getViagem_id() {
-        return null;
+        return viagem_id;
     }
 
     public void setViagem_id(Integer viagem_id) {
@@ -189,5 +184,21 @@ public class viagemEntity {
 
     public void setData_chegada(LocalDateTime data_chegada) {
         this.data_chegada = data_chegada;
+    }
+
+    public motoristaEntity getMotorista() {
+        return motorista;
+    }
+
+    public void setMotorista(motoristaEntity motorista) {
+        this.motorista = motorista;
+    }
+
+    public veiculoEntity getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(veiculoEntity veiculo) {
+        this.veiculo = veiculo;
     }
 }
