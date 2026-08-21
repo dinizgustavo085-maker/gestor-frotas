@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 @Entity
 public class motoristaEntity {
@@ -95,5 +96,16 @@ public class motoristaEntity {
 
     public void setMotorista_id(Integer motorista_id) {
         this.motorista_id = motorista_id;
+    }
+
+    @ManyToMany(mappedBy = "motorista")
+    private Collection<viagemEntity> viagemEntities;
+
+    public Collection<viagemEntity> getViagemEntities() {
+        return viagemEntities;
+    }
+
+    public void setViagemEntities(Collection<viagemEntity> viagemEntities) {
+        this.viagemEntities = viagemEntities;
     }
 }

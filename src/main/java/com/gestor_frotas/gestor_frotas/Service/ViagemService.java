@@ -25,6 +25,7 @@ public class ViagemService {
         validarStatus(viagemValidacao);
         validarRota(viagemValidacao);
         preenchendoCoordenada(viagemValidacao);
+        preencherRota(viagemValidacao);
 
         return viagemRepository.save(viagemValidacao);
     }
@@ -70,6 +71,20 @@ public class ViagemService {
 
         viagem.setLatitude_destino(destino.getLatitude());
         viagem.setLongitude_destino(destino.getLongitude());
+
+    }
+
+    public void preencherRota(viagemEntity viagem){
+        TomTomService.RotaCalculo rota = tomTomService.calculateRoute(viagem.getLatitude_origem().toString(),
+                viagem.getLongitude_origem().toString(),
+                viagem.getLatitude_destino().toString(),
+                viagem.getLongitude_destino().toString());
+
+        viagem.setDistancia_metros(rota.getDistanciaMetros());
+        viagem.setDuracao_segundos(rota.getDuracaoSegundos());
+
+            viagem.setData_chegada(
+                viagem.getData_saida().plusSeconds(rota.getDuracaoSegundos().longValue()));
 
     }
 
