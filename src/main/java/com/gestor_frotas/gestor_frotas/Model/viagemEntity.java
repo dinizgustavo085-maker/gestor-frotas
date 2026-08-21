@@ -3,7 +3,6 @@ package com.gestor_frotas.gestor_frotas.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -37,8 +36,8 @@ public class viagemEntity {
     private Double longitude_destino;
 
     // varivel para calcular o tempo estimado
-    @Column(name = "tempo_estimado")
-    private LocalDate tempo_estimado;
+    @Column(name = "tempo_estimado_descricao")
+    private String tempo_estimado;
 
     @ManyToOne
     @JoinColumn(name = "motorista_id")
@@ -95,11 +94,11 @@ public class viagemEntity {
         this.observacao = observacao;
     }
 
-    public LocalDate getTempo_estimado() {
+    public String getTempo_estimado() {
         return tempo_estimado;
     }
 
-    public void setTempo_estimado(LocalDate tempo_estimado) {
+    public void setTempo_estimado(String tempo_estimado) {
         this.tempo_estimado = tempo_estimado;
     }
 
