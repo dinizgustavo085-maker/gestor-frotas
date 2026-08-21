@@ -9,6 +9,8 @@ import com.gestor_frotas.gestor_frotas.Repository.viagemRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 public class ViagemService {
 
@@ -119,10 +121,28 @@ public class ViagemService {
 
         viagem.setDistancia_metros(rota.getDistanciaMetros());
         viagem.setDuracao_segundos(rota.getDuracaoSegundos());
+        viagem.setDistancia(formatarDistancia(rota.getDistanciaMetros()));
+        viagem.setTempo_estimado(formatarTempoEstimado(rota.getDuracaoSegundos()));
 
             viagem.setData_chegada(
                 viagem.getData_saida().plusSeconds(rota.getDuracaoSegundos().longValue()));
 
+    }
+
+    private String formatarDistancia(Long distanciaMetros) {
+        double distanciaKm = distanciaMetros / 1000.0;
+        return String.format(Locale.US, "%.2f km", distanciaKm);
+    }
+
+    private String formatarTempoEstimado(Long duracaoSegundos) {
+        long horas = duracaoSegundos / 3600;
+        long minutos = (duracaoSegundos % 3600) / 60;
+
+        if (horas == 0) {
+            return minutos + "min";
+        }
+
+        return String.format("%dh %02dmin", horas, minutos);
     }
 
 }
