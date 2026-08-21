@@ -1,6 +1,10 @@
 package com.gestor_frotas.gestor_frotas.Service;
 
+import com.gestor_frotas.gestor_frotas.Model.motoristaEntity;
+import com.gestor_frotas.gestor_frotas.Model.veiculoEntity;
 import com.gestor_frotas.gestor_frotas.Model.viagemEntity;
+import com.gestor_frotas.gestor_frotas.Repository.motoristaRepository;
+import com.gestor_frotas.gestor_frotas.Repository.veiculoRepository;
 import com.gestor_frotas.gestor_frotas.Repository.viagemRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -8,13 +12,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class ViagemService {
 
-    private viagemRepository viagemRepository;
-    private TomTomService tomTomService;
+    private final viagemRepository viagemRepository;
+    private final TomTomService tomTomService;
+    private final motoristaRepository motoristaRepository;
+    private final veiculoRepository veiculoRepository;
 
     // puxando o repository
-    public ViagemService(viagemRepository viagemRepository, TomTomService tomTomService ) {
+    public ViagemService(
+            viagemRepository viagemRepository,
+            TomTomService tomTomService,
+            motoristaRepository motoristaRepository,
+            veiculoRepository veiculoRepository
+    ) {
         this.viagemRepository = viagemRepository;
         this.tomTomService = tomTomService;
+        this.motoristaRepository = motoristaRepository;
+        this.veiculoRepository = veiculoRepository;
     }
 
 
@@ -24,6 +37,8 @@ public class ViagemService {
         validarDatas(viagemValidacao);
         validarStatus(viagemValidacao);
         validarRota(viagemValidacao);
+        validarMotorista(viagemValidacao);
+        validarVeiculo(viagemValidacao);
         preenchendoCoordenada(viagemValidacao);
         preencherRota(viagemValidacao);
 
@@ -57,6 +72,28 @@ public class ViagemService {
         if (viagemStatus.getStatus() == null || viagemStatus.getStatus().isBlank() ){
             viagemStatus.setStatus("AGENDADA");
         }
+    }
+
+    private void validarMotorista(viagemEntity viagem) {
+        if (viagem.getMotorista() == null || viagem.getMotorista().getMotorista_id() == null) {
+            throw new RuntimeException("Motorista e obrigatorio");
+        }
+
+        motoristaEntity motorista = motoristaRepository.findById(viagem.getMotorista().getMotorista_id())
+                .orElseThrow(() -> new RuntimeException("Motorista nao encontrado"));
+
+        viagem.setMotorista(motorista);
+    }
+
+    private void validarVeiculo(viagemEntity viagem) {
+        if (viagem.getVeiculo() == null || viagem.getVeiculo().getVeiculo_id() == null) {
+            throw new RuntimeException("Veiculo e obrigatorio");
+        }
+
+        veiculoEntity veiculo = veiculoRepository.findById(viagem.getVeiculo().getVeiculo_id())
+                .orElseThrow(() -> new RuntimeException("Veiculo nao encontrado"));
+
+        viagem.setVeiculo(veiculo);
     }
 
     public void preenchendoCoordenada(viagemEntity viagem){

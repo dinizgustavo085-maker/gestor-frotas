@@ -97,7 +97,7 @@ public class TomTomService {
 
 
 
-    public RotaCalculo calculateRoute(String latitude_origem, String longitude_destino,String latitude_destino, String longitude_origem){
+    public RotaCalculo calculateRoute(String latitude_origem, String longitude_origem, String latitude_destino, String longitude_destino){
          String pontos = latitude_origem + "," + longitude_origem + ":" + latitude_destino + "," + longitude_destino;
         try {
                URI uri = UriComponentsBuilder

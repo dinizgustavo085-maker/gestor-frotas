@@ -98,14 +98,4 @@ public class motoristaEntity {
         this.motorista_id = motorista_id;
     }
 
-    @ManyToMany(mappedBy = "motorista")
-    private Collection<viagemEntity> viagemEntities;
-
-    public Collection<viagemEntity> getViagemEntities() {
-        return viagemEntities;
-    }
-
-    public void setViagemEntities(Collection<viagemEntity> viagemEntities) {
-        this.viagemEntities = viagemEntities;
-    }
 }
